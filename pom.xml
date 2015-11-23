@@ -1,11 +1,10 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.capitalone.dashboard</groupId>
   <artifactId>Hygieia</artifactId>
   <packaging>pom</packaging>
-  <version>1.0</version>
+  <version>1.5.0-SNAPSHOT</version>
   <name>${project.groupId}:${project.artifactId}</name>
 
   <parent>
@@ -22,7 +21,7 @@
     <jackson.version>2.5.0</jackson.version>
     <guava.version>16.0.1</guava.version>
     <pmd.version>3.5</pmd.version>
-    <jacoco.version>0.5.8.201207111220</jacoco.version>
+    <jacoco.version>0.7.5.201505241946</jacoco.version>
   </properties>
 
   <licenses>
@@ -71,15 +70,20 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-pmd-plugin</artifactId>
           <version>${pmd.version}</version>
-             <executions>
-                <execution>
-                  <phase>validate</phase>
-                  <goals>
-                    <goal>check</goal>
-                    <!-- disabled for now <goal>cpd-check</goal> -->
-                  </goals>
-                </execution>
-             </executions>
+          <configuration>
+            <excludeRoots>
+              <excludeRoot>${project.basedir}/target/generated-sources/java</excludeRoot>
+            </excludeRoots>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>validate</phase>
+              <goals>
+              <goal>check</goal>
+              <!-- disabled for now <goal>cpd-check</goal> -->
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     <pluginManagement>
@@ -106,16 +110,16 @@
       <activeByDefault>true</activeByDefault>
     </activation>
       <modules>
-        <module>common</module>
+        <module>core</module>
         <module>api</module>
-        <module>BuildCollector</module>
-        <module>CodeQualityCollector</module>
-        <module>SourceCodeCollector</module>
-        <module>GitHubSourceCodeCollector</module>
-        <module>VersionOneFeatureCollector</module>
-        <module>DeployCollector</module>
-        <module>JiraFeatureCollector</module>
-        <module>JenkinsCucumberTestCollector</module>
+        <module>jenkins-build-collector</module>
+        <module>sonar-codequality-collector</module>
+        <module>subversion-scm-collector</module>
+        <module>github-scm-collector</module>
+        <module>versionone-feature-collector</module>
+        <module>udeploy-deployment-collector</module>
+        <module>jira-feature-collector</module>
+        <module>jenkins-cucumber-test-collector</module>
         <module>UI</module>
       </modules>
       <build>
@@ -137,16 +141,16 @@
     <profile>
       <id>release</id>
       <modules>
-        <module>common</module>
+        <module>core</module>
         <module>api</module>
-        <module>BuildCollector</module>
-        <module>CodeQualityCollector</module>
-        <module>SourceCodeCollector</module>
-        <module>GitHubSourceCodeCollector</module>
-        <module>VersionOneFeatureCollector</module>
-        <module>DeployCollector</module>
-        <module>JiraFeatureCollector</module>
-        <module>JenkinsCucumberTestCollector</module>
+        <module>jenkins-build-collector</module>
+        <module>sonar-codequality-collector</module>
+        <module>subversion-scm-collector</module>
+        <module>github-scm-collector</module>
+        <module>versionone-feature-collector</module>
+        <module>udeploy-deployment-collector</module>
+        <module>jira-feature-collector</module>
+        <module>jenkins-cucumber-test-collector</module>
       </modules>
       <build>
         <plugins>
